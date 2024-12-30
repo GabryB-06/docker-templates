@@ -1,0 +1,22 @@
+# Root DB credentials:
+# User: root
+# Password: root
+
+services:
+
+  db:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+    #ports:
+    #  - 3306:3306
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  panel:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: db
