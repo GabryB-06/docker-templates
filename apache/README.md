@@ -12,6 +12,7 @@
 - [Server only page](#server-only-page)
 - [HTTP to HTTPS redirect](#http-to-https-redirect)
 - [HTTPS](#https)
+- [Install PHP modules via Composer](#install-php-modules-via-composer)
 
 # No cache
 
@@ -290,3 +291,24 @@ volumes:
 ```
 
 Self signed certificate can be generated with `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout cert/server.key -out cert/server.crt`
+
+# Install PHP modules via Composer
+
+Put in Dockerfile
+
+```docker
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends unzip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
+RUN cd / && composer require {php_module_name} && composer clearcache
+```
+
+Make sure to replace `{php_module_name}` with the name of the PHP module (eg. `google/apiclient`)
+
+To call the library:
+
+```php
+require realpath('/vendor/autoload.php');
+```
