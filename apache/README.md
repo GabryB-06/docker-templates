@@ -1,20 +1,25 @@
 
 # Apache docker templates
 
+## Table of contents
+
 - [Apache docker templates](#apache-docker-templates)
-- [No cache](#no-cache)
-  - [No cache example](#no-cache-example)
-- [Custom 404 page](#custom-404-page)
-  - [Custom 404 page example](#custom-404-page-example)
-- [Mixed root folder](#mixed-root-folder)
-  - [Example mixed root folder](#example-mixed-root-folder)
-- [Internal only page](#internal-only-page)
-- [Server only page](#server-only-page)
-- [HTTP to HTTPS redirect](#http-to-https-redirect)
-- [HTTPS](#https)
+  - [Table of contents](#table-of-contents)
+  - [No cache](#no-cache)
+    - [No cache example](#no-cache-example)
+  - [Custom 404 page](#custom-404-page)
+    - [Custom 404 page example](#custom-404-page-example)
+  - [Mixed root folder](#mixed-root-folder)
+    - [Example mixed root folder](#example-mixed-root-folder)
+  - [Internal only page](#internal-only-page)
+  - [Server only page](#server-only-page)
+  - [HTTP to HTTPS redirect](#http-to-https-redirect)
+  - [HTTPS](#https)
 - [Install PHP modules via Composer](#install-php-modules-via-composer)
 
-# No cache
+---
+
+## No cache
 
 Add
 
@@ -26,7 +31,7 @@ Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
 
 to `apache2.conf` in `<Directory /var/www/>`
 
-## No cache example
+### No cache example
 
 ```Apache
 [...]
@@ -42,11 +47,13 @@ to `apache2.conf` in `<Directory /var/www/>`
 [...]
 ```
 
-# Custom 404 page
+---
 
-Add `ErrorDocument 404 /404.php` to the `000-default.conf` file
+## Custom 404 page
 
-## Custom 404 page example
+Add `ErrorDocument 404 /404.php` to `000-default.conf`
+
+### Custom 404 page example
 
 ```Apache
 <VirtualHost *:80>
@@ -54,7 +61,9 @@ Add `ErrorDocument 404 /404.php` to the `000-default.conf` file
 [...]
 ```
 
-# Mixed root folder
+---
+
+## Mixed root folder
 
 By having two directiories to serve files from, show the files in the same path for the client side \
 Example: there are two directories with files to serve, res1 and res2, with this file contents of both directories got shown under / like if they all are in the same directory \
@@ -75,7 +84,7 @@ RewriteRule ^(.*)$ /res2/$1 [L]
 
 to the `000-default.conf` file in `<Directory /var/www/html>`
 
-## Example mixed root folder
+### Example mixed root folder
 
 ```Apache
 [...]
@@ -98,7 +107,9 @@ to the `000-default.conf` file in `<Directory /var/www/html>`
 [...]
 ```
 
-# Internal only page
+---
+
+## Internal only page
 
 The files under this directory can be opened only by 127.0.0.1, any other client gets a 403 \
 Add
@@ -112,7 +123,9 @@ Add
 
 to the `apache2.conf` file and replace `/internal` with the name of the directory
 
-# Server only page
+---
+
+## Server only page
 
 The files under this directory can be opened only by the server itself and nobody else, even 127.0.0.1 \
 Add
@@ -125,7 +138,9 @@ Add
 
 to the `apache2.conf` file and replace `/internal` with the name of the directory
 
-# HTTP to HTTPS redirect
+---
+
+## HTTP to HTTPS redirect
 
 Redirect every HTTP request to the HTTPS port
 
@@ -143,7 +158,9 @@ Redirect every HTTP request to the HTTPS port
 </VirtualHost>
 ```
 
-# HTTPS
+---
+
+## HTTPS
 
 Enable HTTPS support
 
