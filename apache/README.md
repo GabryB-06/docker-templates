@@ -15,7 +15,7 @@
   - [Server only page](#server-only-page)
   - [HTTP to HTTPS redirect](#http-to-https-redirect)
   - [HTTPS](#https)
-- [Install PHP modules via Composer](#install-php-modules-via-composer)
+  - [Install PHP modules via Composer](#install-php-modules-via-composer)
 
 ---
 
@@ -309,7 +309,9 @@ volumes:
 
 Self signed certificate can be generated with `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout cert/server.key -out cert/server.crt`
 
-# Install PHP modules via Composer
+---
+
+## Install PHP modules via Composer
 
 Put in Dockerfile
 
