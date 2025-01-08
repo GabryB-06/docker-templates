@@ -2,17 +2,24 @@
 # User: root
 # Password: root
 
+# WARNING: Enabling MARIADB_ALLOW_EMPTY_ROOT_PASSWORD is HIGHLY INSECURE!
+# This setting allows the root user to access the database without a password, posing a serious security risk.
+# Use only in trusted, isolated, and temporary environments (e.g., local development).
+# Instead, prefer setting a strong password with MARIADB_ROOT_PASSWORD (and don't use the example's default one) or MARIADB_ROOT_PASSWORD_FILE.
+
 services:
 
   db:
     image: mariadb
     environment:
       MARIADB_ROOT_PASSWORD: root
+      #MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
+      # https://mariadb.com/kb/en/mariadb-server-docker-official-image-environment-variables/
     #ports:
     #  - 3306:3306
     volumes:
       - ./db:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      #- ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro # Scripts in this directory will be run if the database doesn't exist
 
   panel:
     image: phpmyadmin
