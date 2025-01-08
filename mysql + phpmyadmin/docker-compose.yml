@@ -1,0 +1,22 @@
+# Root DB credentials:
+# User: root
+# Password: root
+
+services:
+
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      #MYSQL_ALLOW_EMPTY_PASSWORD: true
+    #ports:
+    #  - 3306:3306
+    volumes:
+      - ./db:/var/lib/mysql
+
+  panel:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysql
