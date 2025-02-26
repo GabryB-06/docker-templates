@@ -1,0 +1,20 @@
+services:
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: php-server
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # Mounts are in read only to prevent changes by the container (eg if any vulnerability is exploited allowing the container to write to the host)
+      - ./conf/apache2.conf:/etc/apache2/apache2.conf:ro # Apache configuration file with:
+                                                         # header with cache exipry backdated to prevent caching (rows 176-178))
+                                                         # internal only page (/internal) (accessible only by the server itself) (rows 188-192)
+      - ./conf/000-default.conf:/etc/apache2/sites-available/000-default.conf:ro # Interfaces configuration with:
+                                                                                 # 404 page (row 2)
+                                                                                 # Combined root source directories (rows 20-29)
+      - ./res1:/var/www/html/res1:ro # First directory with files to serve
+      - ./res2:/var/www/html/res2:ro # Second directory with files to serve
