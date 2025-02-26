@@ -1,0 +1,11 @@
+services:
+
+  apache:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: apache-with-cron
+    ports:
+      - "80:80" # HTTP port
+    volumes:
+      - ./cron.sh:/cron.sh:ro
