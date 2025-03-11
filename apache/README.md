@@ -167,7 +167,6 @@ Enable HTTPS support
 ```Apache
 [...]
 <VirtualHost *:443>
-  ErrorDocument 404 /404.php
   DocumentRoot /var/www/html
 
   # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
