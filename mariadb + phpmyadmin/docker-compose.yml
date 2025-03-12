@@ -2,6 +2,10 @@
 # User: root
 # Password: root
 
+# Interactive session:
+# docker run -it --rm mariadb mariadb --host host --user root --password
+# while compose is running
+
 # WARNING: Enabling MARIADB_ALLOW_EMPTY_ROOT_PASSWORD is HIGHLY INSECURE!
 # This setting allows the root user to access the database without a password, posing a serious security risk.
 # Use only in trusted, isolated, and temporary environments (e.g., local development).
