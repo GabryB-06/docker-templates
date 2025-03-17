@@ -10,3 +10,5 @@ This template container contains:
 - Automatic redirect of the HTTP connections to HTTPS
 - mysqli PHP extension enabled
 - Composer PHP modules install
+
+TODO: make this example fully working (add example files like `index.html` and other example pages)
