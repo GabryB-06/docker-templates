@@ -4,11 +4,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: php-server
+    image: php-server-no-cache
     ports:
       - "80:80"
     volumes:
-      # Mounts are in read only to prevent changes by the container (eg if any vulnerability is exploited allowing the container to write to the host)
-      - ./res:/var/www/html # Directory with files to serve
-      - ./conf/apache2.conf:/etc/apache2/apache2.conf # Apache configuration file with:
+      # Mounts are in read only to prevent changes by the container (eg if any vulnerability is exploited allowing the container to write to the host in the mounted directory/file)
+      - ./res:/var/www/html:ro # Directory with files to serve
+      - ./conf/apache2.conf:/etc/apache2/apache2.conf:ro # Apache configuration file with:
                                                          # header with cache exipry backdated to prevent caching (rows 175-177))

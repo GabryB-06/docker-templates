@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: php-server
+    image: php-server-all-in-one
     ports:
       - "80:80"
       - "443:443"
