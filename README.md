@@ -17,3 +17,4 @@ This repository contains a collection of Docker templates for various applicatio
   - Apache with no cache and with custom 404 page
 - MariaDB with PhpMyAdmin
 - MySQL with PhpMyAdmin
+- Apache with MariaDB and PhpMyAdmin
