@@ -1,0 +1,33 @@
+services:
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: php-server-no-cache
+    ports:
+      - "80:80"
+    volumes:
+      # Mounts are in read only to prevent changes by the container (eg if any vulnerability is exploited allowing the container to write to the host in the mounted directory/file)
+      - ./res:/var/www/html:ro # Directory with files to serve
+      - ./conf/apache2.conf:/etc/apache2/apache2.conf:ro # Apache configuration file with:
+                                                         # header with cache exipry backdated to prevent caching (rows 175-177))
+
+  db:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      #MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
+      # https://mariadb.com/kb/en/mariadb-server-docker-official-image-environment-variables/
+    ports:
+      - 127.0.0.1:3306:3306
+    volumes:
+      - ./db:/var/lib/mysql
+      #- ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro # Scripts in this directory will be run if the database doesn't exist
+
+  panel:
+    image: phpmyadmin
+    ports:
+     - 8080:80
+    environment:
+      PMA_HOST: db
